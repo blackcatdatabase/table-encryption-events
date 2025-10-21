@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-> Schema package for table **encryption_events** (repo: $slug).
+> Schema package for table **encryption_events** (repo: `encryption-events`).
 
 ## Files
 ```
@@ -38,11 +38,11 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/001_table.sql
 | entity_table | VARCHAR(64) | NO | — |  |
 | entity_pk | VARCHAR(64) | NO | — |  |
 | field_name | VARCHAR(64) | NO | — |  |
-| op | ENUM(''encrypt'',''decrypt'',''rotate'',''rehash'',''unwrap'',''wrap'') | NO | — |  |
+| op | ENUM('encrypt','decrypt','rotate','rehash','unwrap','wrap') | NO | — |  |
 | policy_id | BIGINT UNSIGNED | YES | — |  |
 | local_key_version | VARCHAR(64) | YES | — |  |
 | layers | JSON | YES | — |  |
-| outcome | ENUM(''success'',''failure'') | NO | — |  |
+| outcome | ENUM('success','failure') | NO | — |  |
 | error_code | VARCHAR(64) | YES | — |  |
 | created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
 
@@ -52,17 +52,17 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/001_table.sql
 ```mermaid
 erDiagram
   ENCRYPTION_EVENTS {
-    BIGINT id PK
-    VARCHAR(64) entity_table
-    VARCHAR(64) entity_pk
-    VARCHAR(64) field_name
-    ENUM(''encrypt'',''decrypt'',''rotate'',''rehash'',''unwrap'',''wrap'') op
-    BIGINT policy_id
-    VARCHAR(64) local_key_version
+    INT id PK
+    VARCHAR entity_table
+    VARCHAR entity_pk
+    VARCHAR field_name
+    ENUM op
+    INT policy_id
+    VARCHAR local_key_version
     JSON layers
-    ENUM(''success'',''failure'') outcome
-    VARCHAR(64) error_code
-    DATETIME(6) created_at
+    ENUM outcome
+    VARCHAR error_code
+    DATETIME created_at
   }
 ```
 
