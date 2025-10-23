@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace BlackCat\Database\Packages\EncryptionEvents\Service;
 
-use BlackCat\Core\Database\Database;
+use BlackCat\Core\Database;
 use BlackCat\Database\Packages\EncryptionEvents\Dto\EncryptionEventDto;
 use BlackCat\Database\Packages\EncryptionEvents\Mapper\EncryptionEventDtoMapper;
 use BlackCat\Database\Packages\EncryptionEvents\Repository\EncryptionEventRepository;
