@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\EncryptionEvents;
 /**
  * Bezpečný builder WHERE/ORDER/LIMIT.
  * - whitelist filtrů: [ 'id', 'entity_table', 'entity_pk', 'field_name', 'op', 'policy_id', 'local_key_version', 'layers', 'outcome', 'error_code', 'created_at' ]
- * - whitelist pro LIKE hledání: [ 'entity_table', 'entity_pk', 'field_name', 'local_key_version', 'error_code' ]
+ * - whitelist pro LIKE hledání: [ 'entity_table', 'entity_pk', 'field_name', 'op', 'local_key_version', 'outcome', 'error_code' ]
  */
 final class Criteria {
     /** @var array<string,mixed> */
@@ -61,7 +61,7 @@ final class Criteria {
 
         // fulltext/LIKE (přes whitelist)
         if ($this->search !== null) {
-            $searchCols = [ 'entity_table', 'entity_pk', 'field_name', 'local_key_version', 'error_code' ];
+            $searchCols = [ 'entity_table', 'entity_pk', 'field_name', 'op', 'local_key_version', 'outcome', 'error_code' ];
             $likeParts = [];
             foreach ($searchCols as $i=>$c) {
                 if ($c === '') continue;

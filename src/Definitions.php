@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\EncryptionEvents;
 final class Definitions {
     // --- základní metadata ---
     public static function table(): string { return 'encryption_events'; }
-    public static function contractView(): string { return 'v_encryption_events_contract'; }
+    public static function contractView(): string { return 'vw_encryption_events'; }
     /** @return string[] */
     public static function columns(): array { return [ 'id', 'entity_table', 'entity_pk', 'field_name', 'op', 'policy_id', 'local_key_version', 'layers', 'outcome', 'error_code', 'created_at' ]; }
     public static function pk(): string { return 'id'; }
