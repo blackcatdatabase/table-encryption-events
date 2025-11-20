@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-<!-- Auto-generated from schema-map.psd1 @ 6cefe8e (2025-10-22T20:27:41+02:00) -->
+<!-- Auto-generated from schema-map-postgres.psd1 @ 62c9c93 (2025-11-20T21:38:11+01:00) -->
 
 > Schema package for table **encryption_events** (repo: `encryption-events`).
 
@@ -10,7 +10,7 @@
 ```
 schema/
   001_table.sql
-  # (no deferred indexes declared in map)
+  020_indexes.sql
   # (no foreign keys declared in map)
 ```
 
@@ -18,11 +18,13 @@ schema/
 ```bash
 # Apply schema (Linux/macOS):
 mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < schema/001_table.sql
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < schema/020_indexes.sql
 ```
 
 ```powershell
 # Apply schema (Windows PowerShell):
 mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/001_table.sql
+mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/020_indexes.sql
 ```
 
 ## Docker quickstart
@@ -31,22 +33,23 @@ mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/001_t
 docker run --rm -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=app -p 3307:3306 -d mysql:8
 sleep 15
 mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/001_table.sql
+mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 ```
 
 ## Columns
 | Column | Type | Null | Default | Extra |
 |-------:|:-----|:----:|:--------|:------|
-| id | BIGINT UNSIGNED | — | — | AUTO_INCREMENT, PK |
+| id | BIGINT | — | AS | PK |
 | entity_table | VARCHAR(64) | NO | — |  |
 | entity_pk | VARCHAR(64) | NO | — |  |
 | field_name | VARCHAR(64) | NO | — |  |
-| op | ENUM('encrypt','decrypt','rotate','rehash','unwrap','wrap') | NO | — |  |
-| policy_id | BIGINT UNSIGNED | YES | — |  |
+| op | TEXT | NO | — |  |
+| policy_id | BIGINT | YES | — |  |
 | local_key_version | VARCHAR(64) | YES | — |  |
-| layers | JSON | YES | — |  |
-| outcome | ENUM('success','failure') | NO | — |  |
+| layers | JSONB | YES | — |  |
+| outcome | TEXT | NO | — |  |
 | error_code | VARCHAR(64) | YES | — |  |
-| created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
+| created_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) |  |
 
 ## Relationships
 - No outgoing foreign keys.
@@ -58,18 +61,18 @@ erDiagram
     VARCHAR entity_table
     VARCHAR entity_pk
     VARCHAR field_name
-    ENUM op
+    VARCHAR op
     INT policy_id
     VARCHAR local_key_version
-    JSON layers
-    ENUM outcome
+    JSONB layers
+    VARCHAR outcome
     VARCHAR error_code
-    DATETIME created_at
+    TIMESTAMPTZ created_at
   }
 ```
 
 ## Indexes
-- No deferred indexes declared for this table.
+- 1 deferred index statement(s) in schema/020_indexes.sql.
 
 ## Notes
 - Generated from the umbrella repository **blackcat-database** using `scripts/schema-map.psd1`.
