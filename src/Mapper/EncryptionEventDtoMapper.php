@@ -17,7 +17,7 @@ use BlackCat\Database\Support\DtoHydrator;
 final class EncryptionEventDtoMapper
 {
     /** @var array<string,string> Column -> DTO property */
-    private const COL_TO_PROP = [ 'entity_table' => 'entityTable', 'entity_pk' => 'entityPk', 'field_name' => 'fieldName', 'policy_id' => 'policyId', 'local_key_version' => 'localKeyVersion', 'error_code' => 'errorCode', 'created_at' => 'createdAt' ];
+    private const COL_TO_PROP = [ 'id' => 'id', 'entity_table' => 'entityTable', 'entity_pk' => 'entityPk', 'field_name' => 'fieldName', 'op' => 'op', 'policy_id' => 'policyId', 'local_key_version' => 'localKeyVersion', 'layers' => 'layers', 'outcome' => 'outcome', 'error_code' => 'errorCode', 'created_at' => 'createdAt' ];
 
     /** @var string[] */
     private const BOOL_COLS   = [];
@@ -39,13 +39,8 @@ final class EncryptionEventDtoMapper
 
     private static function tz(): DateTimeZone
     {
-        if (self::$tzObj instanceof DateTimeZone) {
-            return self::$tzObj;
-        }
-        try {
+        if (!(self::$tzObj instanceof DateTimeZone)) {
             self::$tzObj = new DateTimeZone(self::TZ);
-        } catch (\Throwable) {
-            self::$tzObj = new DateTimeZone('UTC');
         }
         return self::$tzObj;
     }
