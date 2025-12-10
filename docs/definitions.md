@@ -5,17 +5,17 @@ Audit of cryptographic operations.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| created_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Timestamp (UTC). |
-| entity_pk | VARCHAR(64) | NO |  | Entity primary key. |
-| entity_table | VARCHAR(64) | NO |  | Entity table name. |
-| error_code | VARCHAR(64) | YES |  | Error code when failure. |
-| field_name | VARCHAR(64) | NO |  | Target field. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| layers | mysql: JSON / postgres: JSONB | YES |  | JSON list of layers/steps. |
-| local_key_version | VARCHAR(64) | YES |  | Local key version used. |
+| entity_table | VARCHAR(64) | NO |  | Entity table name. |
+| entity_pk | VARCHAR(64) | NO |  | Entity primary key. |
+| field_name | VARCHAR(64) | NO |  | Target field. |
 | op | mysql: ENUM('encrypt','decrypt','rotate','rehash','unwrap','wrap') / postgres: TEXT | NO |  | Operation performed. (enum: encrypt, decrypt, rotate, rehash, unwrap, wrap) |
-| outcome | mysql: ENUM('success','failure') / postgres: TEXT | NO |  | Result. (enum: success, failure) |
 | policy_id | BIGINT | YES |  | Applied policy (FK encryption_policies.id), optional. |
+| local_key_version | VARCHAR(64) | YES |  | Local key version used. |
+| layers | mysql: JSON / postgres: JSONB | YES |  | JSON list of layers/steps. |
+| outcome | mysql: ENUM('success','failure') / postgres: TEXT | NO |  | Result. (enum: success, failure) |
+| error_code | VARCHAR(64) | YES |  | Error code when failure. |
+| created_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Timestamp (UTC). |
 
 ## Engine Details
 
