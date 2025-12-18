@@ -1,0 +1,41 @@
+{
+  "tables": {
+    "encryption_events": {
+      "columns": {
+        "created_at": {
+          "strategy": "passthrough"
+        },
+        "entity_pk": {
+          "strategy": "passthrough"
+        },
+        "entity_table": {
+          "strategy": "passthrough"
+        },
+        "error_code": {
+          "strategy": "passthrough"
+        },
+        "field_name": {
+          "strategy": "passthrough"
+        },
+        "id": {
+          "strategy": "passthrough"
+        },
+        "layers": {
+          "strategy": "passthrough"
+        },
+        "local_key_version": {
+          "strategy": "passthrough"
+        },
+        "op": {
+          "strategy": "passthrough"
+        },
+        "outcome": {
+          "strategy": "passthrough"
+        },
+        "policy_id": {
+          "strategy": "passthrough"
+        }
+      }
+    }
+  }
+}
